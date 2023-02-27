@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<script>
+
+
+let list = document.querySelectorAll(".list");
+let itemBox = document.querySelectorAll(".itembox");
+let boxFancy = document.querySelectorAll(".fancybox");
+
+for (let i = 0; i < list.length; i++) {
+  list[i].addEventListener("click", function () {
+    for (let j = 0; j < list.length; j++) {
+      list[j].classList.remove("active");
+    }
+    this.classList.add("active");
+
+    let dataFilter = this.getAttribute("data-filter");
+
+    for (let k = 0; k < itemBox.length; k++) {
+      itemBox[k].classList.remove("active");
+      itemBox[k].classList.add("hide");
+
+      if (
+        itemBox[k].getAttribute("data-item") == dataFilter ||
+        dataFilter == "all"
+      ) {
+        itemBox[k].classList.remove("hide");
+        itemBox[k].classList.add("active");
+      }
+    }
+    for (let m = 0; m < boxFancy.length; m++) {
+      boxFancy[m].classList.remove("active");
+      Fancybox.bind("[data-fancybox].active", {
+        groupAll: false
+      });
+      if (
+        boxFancy[m].getAttribute("data-item") == dataFilter ||
+        dataFilter == "all"
+      ) {
+        boxFancy[m].classList.add("active");
+        Fancybox.bind("[data-fancybox].active", {
+          groupAll: true
+        });
+      }
+    }
+  });
+}
+
+
+
+</script>
+
+
+
+
+    <style>
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
+@import url(https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css);
+/*===== VARIABLES CSS =====*/
+:root {
+  --header-height: 3rem;
+  --font-medium: 500;
+}
+/*===== Colores =====*/
+:root {
+  --first-color: #49a687;
+  --complementary-color: #f99d6e;
+  --white-color: #fafaff;
+  --dark-color: #2a3b47;
+  --text-color: #697477;
+  --white-color-glass: rgba(250, 250, 255, 0.4);
+}
+/*===== Fuente y tipografia =====*/
+:root {
+  --body-font: "Montserrat", sans-serif;
+  --big-font-size: 6.25rem;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+section.res__gallery {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 40px auto;
+}
+section.res__gallery ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+section.res__gallery ul li {
+  list-style: none;
+  background: var(--first-color);
+  color: var(--white-color);
+  font-size: var(--h2-font-size);
+  padding: 12px 20px;
+  margin: 5px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  -ms-user-select: None;
+  -moz-user-select: None;
+  -webkit-user-select: None;
+  user-select: None;
+}
+section.res__gallery ul li.active {
+  background: var(--complementary-color);
+  color: var(--white-color);
+}
+.product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  -ms-user-select: None;
+  -moz-user-select: None;
+  -webkit-user-select: None;
+  user-select: None;
+}
+.product .itembox {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  display: block;
+}
+.product .itembox.hide {
+  display: none;
+}
+.product .itembox img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+a[data-fancybox] img {
+  cursor: zoom-in;
+}
+
+/* div[data-item="category0"] {
+    display: none !important;
+} */
+
+
+    </style>
+</head>
+<body>
+    <body>
+        <section class="res__gallery">
+          <ul>
+            <li class="list active" data-filter="all">Alles</li>
+            <li class="list" data-filter="category1">category1</li>
+            <li class="list" data-filter="category2">category2</li>
+            <li class="list" data-filter="category3">category3</li>
+            <li class="list" data-filter="category4">category4</li>
+            <li class="list" data-filter="category5">category5</li>
+          </ul>
+          <div class="product">
+            <div class="itembox" data-item="category1">
+              <a class="fancybox" index="1" data-fancybox="category1" data-caption="Short caption" href="https://mectag-design.com/assets/images/mobile1.jpg">
+                <img src="https://mectag-design.com/assets/images/mobile1.jpg" alt="mobile1" title="Mobile1">
+              </a>
+            </div>
+            <div class="itembox" data-item="category2">
+              <a class="fancybox" data-index="1" data-fancybox="category2" data-caption="Short caption" href="https://mectag-design.com/assets/images/camera1.jpg">
+                <img src="https://mectag-design.com/assets/images/camera1.jpg" alt="camera1">
+              </a>
+            </div>
+            <div class="itembox" data-item="category3">
+              <a class="fancybox" index="1" data-fancybox="category3" data-caption="Short caption" href="https://mectag-design.com/assets/images/watch1.jpg">
+                <img src="https://mectag-design.com/assets/images/watch1.jpg" alt="watch1">
+              </a>
+            </div>
+            <div class="itembox" data-item="category4">
+              <a class="fancybox" index="1" data-fancybox="category4" data-caption="Short caption" href="https://mectag-design.com/assets/images/shoe1.jpg">
+                <img src="https://mectag-design.com/assets/images/shoe1.jpg" alt="shoe1">
+              </a>
+            </div>
+            <div class="itembox" data-item="category5">
+              <a class="fancybox" index="1" data-fancybox="category5" data-caption="Short caption" href="https://mectag-design.com/assets/images/headphone1.jpg">
+                <img src="https://mectag-design.com/assets/images/headphone1.jpg" alt="headphone1">
+              </a>
+            </div>
+            <div class="itembox" data-item="category1">
+              <a class="fancybox" index="5" data-fancybox="category1" data-caption="Short caption" href="https://mectag-design.com/assets/images/mobile2.jpg">
+                <img src="https://mectag-design.com/assets/images/mobile2.jpg" alt="mobile2">
+              </a>
+            </div>
+            <div class="itembox" data-item="category2">
+              <a class="fancybox" index="2" data-fancybox="category2" data-caption="Short caption" href="https://mectag-design.com/assets/images/camera2.jpg">
+                <img src="https://mectag-design.com/assets/images/camera2.jpg" alt="camera2">
+              </a>
+            </div>
+            <div class="itembox" data-item="category3">
+              <a class="fancybox" index="2" data-fancybox="category3" data-caption="Short caption" href="https://mectag-design.com/assets/images/watch2.jpg">
+                <img src="https://mectag-design.com/assets/images/watch2.jpg" alt="watch2">
+              </a>
+            </div>
+            <div class="itembox" data-item="category4">
+              <a class="fancybox" index="2" data-fancybox="category4" data-caption="Short caption" href="https://mectag-design.com/assets/images/shoe2.jpg">
+                <img src="https://mectag-design.com/assets/images/shoe2.jpg" alt="shoe2">
+              </a>
+            </div>
+            <div class="itembox" data-item="category5">
+              <a class="fancybox" index="2" data-fancybox="category5" data-caption="Short caption" href="https://mectag-design.com/assets/images/headphone2.jpg">
+                <img src="https://mectag-design.com/assets/images/headphone2.jpg" alt="headphone2">
+              </a>
+            </div>
+            <div class="itembox" data-item="category1">
+              <a class="fancybox" index="3" data-fancybox="category1" data-caption="Short caption" href="https://mectag-design.com/assets/images/mobile3.jpg">
+                <img src="https://mectag-design.com/assets/images/mobile3.jpg" alt="mobile3">
+              </a>
+            </div>
+            <div class="itembox" data-item="category2">
+              <a class="fancybox" index="3" data-fancybox="category2" data-caption="Short caption" href="https://mectag-design.com/assets/images/camera3.jpg">
+                <img src="https://mectag-design.com/assets/images/camera3.jpg" alt="camera3">
+              </a>
+            </div>
+            <div class="itembox" data-item="category3">
+              <a class="fancybox" index="3" data-fancybox="category3" data-caption="Short caption" href="https://mectag-design.com/assets/images/watch3.jpg">
+                <img src="https://mectag-design.com/assets/images/watch3.jpg" alt="watch3">
+              </a>
+            </div>
+            <div class="itembox" data-item="category4">
+              <a class="fancybox" index="3" data-fancybox="category4" data-caption="Short caption" href="https://mectag-design.com/assets/images/shoe3.jpg">
+                <img src="https://mectag-design.com/assets/images/shoe3.jpg" alt="shoe3">
+              </a>
+            </div>
+            <div class="itembox" data-item="category5">
+              <a class="fancybox" index="3" data-fancybox="category5" data-caption="Short caption" href="https://mectag-design.com/assets/images/headphone3.jpg">
+                <img src="https://mectag-design.com/assets/images/headphone3.jpg" alt="headphone3">
+              </a>
+            </div>
+            <div class="itembox" data-item="category1">
+              <a class="fancybox" index="4" data-fancybox="category1" data-caption="Short caption" href="https://mectag-design.com/assets/images/mobile4.jpg">
+                <img src="https://mectag-design.com/assets/images/mobile4.jpg" alt="mobile4">
+              </a>
+            </div>
+            <div class="itembox" data-item="category3">
+              <a class="fancybox" index="4" data-fancybox="category3" data-caption="Short caption" href="https://mectag-design.com/assets/images/watch4.jpg">
+                <img src="https://mectag-design.com/assets/images/watch4.jpg" alt="watch4">
+              </a>
+            </div>
+            <div class="itembox" data-item="category4">
+              <a class="fancybox" index="4" data-fancybox="category4" data-caption="Short caption" href="https://mectag-design.com/assets/images/shoe4.jpg">
+                <img src="https://mectag-design.com/assets/images/shoe4.jpg" alt="shoe4">
+              </a>
+            </div>
+            <div class="itembox" data-item="category5">
+              <a class="fancybox" index="4" data-fancybox="category5" data-caption="Short caption" href="https://mectag-design.com/assets/images/headphone4.jpg">
+                <img src="https://mectag-design.com/assets/images/headphone4.jpg" alt="headphone4">
+              </a>
+            </div>
+            <div class="itembox" data-item="category1">
+              <a class="fancybox" index="2" data-fancybox="category1" data-caption="Short caption" href="https://mectag-design.com/assets/images/mobile5.jpg">
+                <img src="https://mectag-design.com/assets/images/mobile5.jpg" alt="mobile5">
+              </a>
+            </div>
+          </div>
+        </section>
+      
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+      
+      </body>
+</body>
+</html>
